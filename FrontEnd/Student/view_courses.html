@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 목록 보기</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="container">
+        <h1>강의 목록 보기</h1>
+
+        <!-- 년도 및 학기 선택 폼 -->
+        <form id="courseForm">
+            <div class="form-group">
+                <label for="year">년도:</label>
+                <select id="year" required>
+                    <option value="">년도 선택</option>
+                    <!-- JavaScript로 동적으로 추가됩니다 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="semester">학기:</label>
+                <select id="semester" required>
+                    <option value="">학기 선택</option>
+                    <option value="Spring">봄학기</option>
+                    <option value="Summer">여름학기</option>
+                    <option value="Fall">가을학기</option>
+                    <option value="Winter">겨울학기</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="loadCourses()">강의 목록 로드</button>
+            </div>
+        </form>
+
+        <!-- 강의 목록 테이블 -->
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>강의명</th>
+                    <th>강의 코드</th>
+                    <th>교수님</th>
+                    <th>요일</th>
+                    <th>교시</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 강의 목록이 여기에 표시됩니다 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="view_courses.js"></script>
+</body>
+</html>
