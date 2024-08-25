@@ -9,6 +9,8 @@ public class AuthService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -25,6 +27,14 @@ public class AuthService {
         Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
         if (teacher != null && passwordEncoder.matches(password, teacher.getPassword())) {
             return teacher;
+        }
+        return null;
+    }
+
+    public Student authenticate2(int studentId, String password) {
+        Student student = studentRepository.findById(studentId).orElse(null);
+        if (student != null && passwordEncoder.matches(password, student.getPassword())) {
+            return student;
         }
         return null;
     }

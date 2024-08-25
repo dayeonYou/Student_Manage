@@ -42,6 +42,18 @@ public class AuthController {
         return ResponseEntity.ok("Logged out successfully");
     }
 
+    @PostMapping("/loginSt")
+    public ResponseEntity<String> loginSt(@RequestParam int studentId, @RequestParam String password, HttpSession session) {
+        Student student = authService.authenticate2(studentId, password);
+
+        if (student != null) {
+            session.setAttribute("teacher_id", student.getStudentId());
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
     @PostMapping("/teacher")
     public ResponseEntity<?> createTeacher(@RequestBody Teacher teacher) {
         if (teacher.getName() == null) {
