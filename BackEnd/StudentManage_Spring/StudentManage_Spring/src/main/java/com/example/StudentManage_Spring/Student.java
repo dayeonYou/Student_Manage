@@ -36,7 +36,8 @@ public class Student {
 
     @Column(length = 100)
     private String major;
-
+    @Column(nullable = false)
+    private String password;
     // 기본 생성자
     public Student() {}
 

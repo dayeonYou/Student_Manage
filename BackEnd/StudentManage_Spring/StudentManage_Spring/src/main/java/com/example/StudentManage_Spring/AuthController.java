@@ -16,6 +16,9 @@ public class AuthController {
     private TeacherService teacherService;
 
     @Autowired
+    private StudentService studentService;
+
+    @Autowired
     private AuthService authService;
 
     @Autowired
@@ -52,5 +55,20 @@ public class AuthController {
 
         teacherService.saveTeacher(teacher);
         return ResponseEntity.ok("Teacher created successfully");
+    }
+
+    @PostMapping("/student")
+    public ResponseEntity<?> createStudent(@RequestBody Student student) {
+        if (student.getName() == null) {
+            return ResponseEntity.badRequest().body("Student name cannot be null");
+        }
+
+        if (student.getPassword() != null) {
+            String hashedPassword = passwordEncoder.encode(student.getPassword());
+            student.setPassword(hashedPassword);
+        }
+
+        studentService.saveStudent(student);
+        return ResponseEntity.ok("student created successfully");
     }
 }
