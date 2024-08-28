@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -25,14 +29,20 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam int teacherId, @RequestParam String password, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> login(@RequestParam int teacherId, @RequestParam String password, HttpSession session) {
         Teacher teacher = authService.authenticate(teacherId, password);
 
-        if (teacher != null) {
+        if (teacher!= null) {
             session.setAttribute("teacher_id", teacher.getTeacherId());
-            return ResponseEntity.ok("Login successful");
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login successful");
+            response.put("teacherId", teacher.getTeacherId());
+            response.put("name", teacher.getName());
+
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "Invalid credentials"));
         }
     }
 
@@ -43,16 +53,23 @@ public class AuthController {
     }
 
     @PostMapping("/loginSt")
-    public ResponseEntity<String> loginSt(@RequestParam int studentId, @RequestParam String password, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> loginSt(@RequestParam int studentId, @RequestParam String password, HttpSession session) {
         Student student = authService.authenticate2(studentId, password);
 
         if (student != null) {
-            session.setAttribute("teacher_id", student.getStudentId());
-            return ResponseEntity.ok("Login successful");
+            session.setAttribute("student_id", student.getStudentId());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login successful");
+            response.put("studentId", student.getStudentId());
+            response.put("name", student.getName());
+
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "Invalid credentials"));
         }
     }
+
 
     @PostMapping("/teacher")
     public ResponseEntity<?> createTeacher(@RequestBody Teacher teacher) {

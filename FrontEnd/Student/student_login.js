@@ -14,10 +14,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             password: password
         })
     })
-    .then(response => {
-        if (response.ok) {
-            alert('Login successful');
-            window.location.href = 'add_student.html'; // 로그인 성공 시 리다이렉션
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === "Login successful") {
+            // Store user data in sessionStorage or localStorage
+            sessionStorage.setItem('studentId', data.studentId);
+            sessionStorage.setItem('name', data.name);
+            
+            // Redirect to home screen
+            window.location.href = 'student_home.html'; 
         } else {
             alert('Login failed');
         }

@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
             loadPage(url);
         });
     });
+    // Display user info if available
+    const teacherId = sessionStorage.getItem('teacherId');
+    const name = sessionStorage.getItem('name');
+    
+    if (teacherId && name) {
+        document.getElementById('username').textContent = `이름: ${name}`;
+        document.getElementById('role').textContent = `학생 (ID: ${teacherId})`;
+    }
 });
 
 function loadPage(url) {
