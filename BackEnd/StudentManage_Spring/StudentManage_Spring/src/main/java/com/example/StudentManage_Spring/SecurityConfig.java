@@ -1,5 +1,6 @@
 package com.example.StudentManage_Spring;
 
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +32,7 @@ public class SecurityConfig {
                 .formLogin(form ->
                         form
                                 .loginPage("/login").permitAll()        // 커스텀 로그인 페이지 설정
+                                .loginPage("/api/auth/loginSt").permitAll()        // 커스텀 로그인 페이지 설정
                 )
                 .logout(logout ->
                         logout
@@ -58,4 +64,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();  // 비밀번호 암호화 방식 설정
     }
+
 }

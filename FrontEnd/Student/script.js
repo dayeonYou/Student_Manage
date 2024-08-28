@@ -15,6 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('username').textContent = `이름: ${name}`;
         document.getElementById('role').textContent = `학생 (ID: ${studentId})`;
     }
+
+    // Logout button event listener
+    document.querySelector('.logout-button').addEventListener('click', function() {
+        fetch('http://localhost:8080/api/auth/logout', {
+            method: 'POST',
+            origin: true,
+            credentials: 'same-origin',
+            
+        })
+        .then(response => {
+            if (response.ok) {
+                // Clear session data
+                sessionStorage.removeItem('studentId');
+                sessionStorage.removeItem('name');
+                
+                // Redirect to login page
+                window.location.href = 'student_login.html';
+            } else {
+                alert('Logout failed');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
 });
 
 function loadPage(url) {
