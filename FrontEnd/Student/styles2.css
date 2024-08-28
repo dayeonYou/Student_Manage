@@ -1,7 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
-    display: flex;
+    /* display: flex; */
+    flex-direction: column; /* 세로로 정렬되게 설정 */
+    align-items: center; /* 중앙 정렬 */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -10,10 +12,10 @@ body {
 
 .container {
     background-color: #fff;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 600px;
+    clear: both;
+
 }
 
 
@@ -22,13 +24,14 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 600px;
+    width: 95%;
 }
 
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    
 }
 
 .form-group {
@@ -76,7 +79,7 @@ table th,
 table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    /*text-align: left;*/
 }
 
 table th {

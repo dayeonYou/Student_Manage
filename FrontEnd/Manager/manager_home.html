@@ -15,14 +15,16 @@
                 <p id="role">관리자</p>
             </div>
             <nav class="navigation">
-                <button onclick="location.href='add_student.html'">학생 추가</button>
-                <button onclick="location.href='view_students.html'">전체 학생</button>
-                <button onclick="location.href='view_teachers.html'">전체 교직원</button>
+                <button data-url="Student_add.html">학생 추가</button>
+                <button data-url="Teacher_add.html">교수 추가</button>
+                <button data-url="view_students.html">전체 학생</button>
+                <button data-url="view_teachers.html">전체 교수</button>
             </nav>
         </div>
-        <div class="main-content">
-            <!-- 오른쪽 비워둠 -->
+        <div class="main-content" id="main-content">
+            <!-- 동적으로 로드된 콘텐츠가 여기에 표시 -->
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

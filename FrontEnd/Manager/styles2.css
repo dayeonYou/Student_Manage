@@ -13,7 +13,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 900px; /* 테이블이 더 넓어지도록 전체 컨테이너 너비 증가 */
+    width: 95%; /* 테이블이 더 넓어지도록 전체 컨테이너 너비 증가 */
 }
 
 h1 {
