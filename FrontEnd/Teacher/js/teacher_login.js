@@ -23,9 +23,9 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             
             // Redirect to home screen
             if (data.teacherId === 0) {
-                window.location.href = '../Manager/manager_home.html'; 
+                window.location.href = '../../Manager/html/manager_home.html'; 
             } else {
-                window.location.href = 'teacher_home.html';
+                window.location.href = '../html/teacher_home.html';
             }
         } else {
             alert('Login failed');

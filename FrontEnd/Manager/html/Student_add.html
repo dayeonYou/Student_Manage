@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 추가</title>
+    <link rel="stylesheet" href="../../css/styles_add.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="login-info">
+                <h2>로그인 정보</h2>
+                <p id="username">MANAGER</p>
+                <p id="role">관리자</p>
+            </div>
+            <nav class="navigation">
+                <button data-url="Student_add.html">학생 추가</button>
+                <button data-url="Teacher_add.html">교수 추가</button>
+                <button data-url="view_students.html">전체 학생</button>
+                <button data-url="view_teachers.html">전체 교수</button>
+            </nav>
+            <button class="logout-button">Logout</button>
+        </div>
+        <div class="main-content" id="main-content">
+        </div>
+        <div class="main-container">
+            <div class="login-container">
+                <h1>학생 추가</h1>
+                <form id="createForm">
+                    <input type="text" id="studentId" placeholder="학번" required><br>
+                    <input type="text" id="name" placeholder="이름" required><br>
+                    <input type="text" id="major" placeholder="전공"><br>
+                    <input type="text" id="phone_number" placeholder="전화번호"><br>
+                    <input type="number" id="student_grade" placeholder="학년"><br>
+                    <input type="date" id="birth_date" placeholder="생년월일"><br>
+                    <input type="text" id="gender" placeholder="Male/Female"><br>
+                    <input type="text" id="address" placeholder="주소"><br>
+                    <input type="password" id="password" placeholder="비밀번호" required><br>
+                    <button type="submit">등록</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/Student_add.js"></script>
+</body>
+</html>

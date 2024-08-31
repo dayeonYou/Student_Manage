@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교수 목록</title>
+    <link rel="stylesheet" href="../../css/styles2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="login-info">
+                <h2>로그인 정보</h2>
+                <p id="username">MANAGER</p>
+                <p id="role">관리자</p>
+            </div>
+            <nav class="navigation">
+                <button data-url="Student_add.html">학생 추가</button>
+                <button data-url="Teacher_add.html">교수 추가</button>
+                <button data-url="view_students.html">전체 학생</button>
+                <button data-url="view_teachers.html">전체 교수</button>
+            </nav>
+            <button class="logout-button">Logout</button>
+        </div>
+        <div class="main-content" id="main-content">
+        </div>
+        <div class="main-container">
+            <h1>교수 목록</h1>
+
+            <!-- 학생 목록 테이블 -->
+            <table id="teacherTable">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>생년월일</th>
+                        <th>성별</th>
+                        <th>주소</th>
+                        <th>전화번호</th>
+                        <th>전공</th>
+                        <th>이메일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 선생 정보가 여기에 표시 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/view_teachers.js"></script>
+</body>
+</html>
