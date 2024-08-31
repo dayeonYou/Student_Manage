@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학생 프로필</title>
-    <link rel="stylesheet" href="styles2.css">
+    <title>홈 화면</title>
+    <link rel="stylesheet" href="../../css/style_home.css">
+    <!-- jQuery 라이브러리 포함 (CDN) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 기본 스크립트 포함 -->
+    <script src="../js/homeS_script.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -23,16 +27,11 @@
             <!-- Logout button -->
             <button class="logout-button">Logout</button>
         </div>
-        <div class="main-container">
-            <h1>학생 프로필</h1>
-            <!-- 학생 정보 테이블 -->
-            <table class="vertical-table">
-                <tbody id="studentInfo">
-                    <!-- 학생 정보가 여기에 표시 -->
-                </tbody>
-            </table>
+        <div class="main-content" id="main-content">
+            <!-- 오른쪽 비워둠 -->
         </div>
     </div>
-    <script src="view_inform.js"></script>
+    <!-- 스크립트 삽입용 div -->
+    <div id="dynamic-content" style="display: none;"></div>
 </body>
 </html>
