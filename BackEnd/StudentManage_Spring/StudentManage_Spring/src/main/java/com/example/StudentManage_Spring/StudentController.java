@@ -38,4 +38,14 @@ public class StudentController {
         studentService.deleteStudent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Student> updateStudentField(
+            @PathVariable int id,
+            @RequestParam String field,
+            @RequestParam String value) {
+        return new ResponseEntity<>(studentService.updateStudentField(id, field, value), HttpStatus.OK);
+    }
+
+
 }

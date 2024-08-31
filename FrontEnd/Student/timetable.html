@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강의 목록 보기</title>
+    <title>시간표 보기</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
@@ -23,16 +23,13 @@
             <!-- Logout button -->
             <button class="logout-button">Logout</button>
         </div>
-        <div class="main-container">
-            <h1>강의 목록 보기</h1>
-
-            <!-- 년도 및 학기 선택 폼 -->
-            <form id="courseForm">
+            <div class="main-container">
+            <h1>시간표 보기</h1>
+            <form id="scheduleForm">
                 <div class="form-group">
                     <label for="year">년도:</label>
-                    <select id="year" required>
-                        <option value="">년도 선택</option>
-                        <!-- JavaScript로 동적으로 추가됩니다 -->
+                    <select id="year" name="year" required>
+                        <!-- 년도 옵션이 동적으로 추가됩니다. -->
                     </select>
                 </div>
                 <div class="form-group">
@@ -45,28 +42,27 @@
                         <option value="Winter">겨울학기</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <button type="button" onclick="loadCourses()">강의 목록 로드</button>
-                </div>
+                <button type="submit">시간표 보기</button>
             </form>
-
-            <!-- 강의 목록 테이블 -->
-            <table id="courseTable">
-                <thead>
-                    <tr>
-                        <th>강의명</th>
-                        <th>강의 코드</th>
-                        <th>교수님</th>
-                        <th>요일</th>
-                        <th>교시</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 강의 목록이 여기에 표시됩니다 -->
-                </tbody>
-            </table>
+            <div id="scheduleResults">
+                <table id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>교수님 이름</th>
+                            <th>과목 ID</th>
+                            <th>과목명</th>
+                            <th>요일</th>
+                            <th>시간</th>
+                            <th>교실</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 시간표가 여기에 표시됩니다. -->
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-    <script src="view_courses.js"></script>
+    </div>
+    <script src="timetable.js"></script>
 </body>
 </html>

@@ -22,7 +22,11 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             sessionStorage.setItem('name', data.name);
             
             // Redirect to home screen
-            window.location.href = 'teacher_home.html'; 
+            if (data.teacherId === 0) {
+                window.location.href = '../Manager/manager_home.html'; 
+            } else {
+                window.location.href = 'teacher_home.html';
+            }
         } else {
             alert('Login failed');
         }

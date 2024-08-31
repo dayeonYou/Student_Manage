@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = sessionStorage.getItem('name');
 
     if (teacherId && name) {
-        document.getElementById('username').textContent = `이름: ${name}`;
-        document.getElementById('role').textContent = `교수 (ID: ${teacherId})`;
+        //document.getElementById('username').textContent = `이름: ${name}`;
+        document.getElementById('role').textContent = `NUMBER: ${teacherId}`;
     }
     // Logout button event listener
     document.querySelector('.logout-button').addEventListener('click', function() {

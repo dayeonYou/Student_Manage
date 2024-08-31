@@ -5,40 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>성적 조회</title>
     <link rel="stylesheet" href="styles2.css">
+    <style>
+        .disabled {
+            background-color: #f0f0f0; /* 회색 배경 */
+            color: #1a1a1a; /* 회색 텍스트 */
+            cursor: not-allowed; /* 비활성화 커서 */
+        }
+    </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="form-container">
-            <h2>성적 조회</h2>
-            <form id="grade-form">
-                <div class="form-group">
-                    <label for="studentId">학생 ID</label>
-                    <input type="number" id="studentId" name="studentId" required>
-                </div>
-                <div class="form-group">
-                    <label for="year">년도</label>
-                    <select id="year" name="year">
-                        <option value="">년도 선택</option>
-                        <!-- JavaScript로 동적으로 추가됩니다 -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="semester">학기</label>
-                    <select id="semester" name="semester">
-                        <option value="">학기 선택</option>
-                        <option value="Spring">봄학기</option>
-                        <option value="Summer">여름학기</option>
-                        <option value="Fall">가을학기</option>
-                        <option value="Winter">겨울학기</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="button" onclick="fetchGrades()">성적 조회</button>
-                </div>
-            </form>
-            <div id="results"></div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="login-info">
+                <h2>로그인 정보</h2>
+                <p id="username">사용자 이름</p>
+                <p id="role">학생</p>
+            </div>
+            <nav class="navigation">
+                <button data-url="student_check_grade.html">성적 조회</button>
+                <button data-url="view_courses.html">강의 조회</button>
+                <button data-url="timetable.html">시간표 조회</button>
+                <button data-url="view_inform.html">내 정보 수정</button>
+            </nav>
+            <!-- Logout button -->
+            <button class="logout-button">Logout</button>
         </div>
-    </div>
-    <script src="student_check_grade.js"></script>
+        <div class="main-container">
+            <div class="form-container">
+                <h2>성적 조회</h2>
+                <form id="grade-form">
+                    <div class="form-group">
+                        <label for="studentId">학생 ID</label>
+                        <input type="number" id="studentId" name="studentId" required class="disabled" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">년도</label>
+                        <select id="year" name="year">
+                            <option value="">년도 선택</option>
+                            <!-- JavaScript로 동적으로 추가 -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">학기</label>
+                        <select id="semester" name="semester">
+                            <option value="">학기 선택</option>
+                            <option value="Spring">봄학기</option>
+                            <option value="Summer">여름학기</option>
+                            <option value="Fall">가을학기</option>
+                            <option value="Winter">겨울학기</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="fetchGrades()">성적 조회</button>
+                    </div>
+                </form>
+                <div id="results"></div>
+            </div>
+        </div>
+    <script src="student_check_grade.js" defer></script>
 </body>
 </html>

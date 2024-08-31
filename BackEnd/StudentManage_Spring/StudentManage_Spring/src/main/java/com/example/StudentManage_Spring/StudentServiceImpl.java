@@ -32,7 +32,6 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudent(int id) {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
-
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -46,5 +45,32 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void saveStudent(Student student) {
         studentRepository.save(student);
+    }
+    @Override
+    public Student updateStudentField(int id, String fieldName, String newValue) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        switch (fieldName) {
+            case "name":
+                existingStudent.setName(newValue);
+                break;
+            case "gender":
+                existingStudent.setGender(newValue);
+                break;
+            case "address":
+                existingStudent.setAddress(newValue);
+                break;
+            case "phoneNumber":
+                existingStudent.setPhoneNumber(newValue);
+                break;
+            case "password":
+                existingStudent.setPassword(newValue);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid field name: " + fieldName);
+        }
+
+        return studentRepository.save(existingStudent);
     }
 }

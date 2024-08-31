@@ -9,5 +9,6 @@ public interface StudentService {
     List<Student> getAllStudents();
     void deleteStudent(int id);
     void saveStudent(Student student);
+    Student updateStudentField(int id, String fieldName, String newValue);
 
 }
