@@ -73,4 +73,9 @@ public class StudentServiceImpl implements StudentService {
 
         return studentRepository.save(existingStudent);
     }
+    // 특정 강의를 듣는 학생들의 리스트를 반환하는 메서드
+    public List<Student> getStudentsByCourseOffering(Long offeringId) {
+        return studentRepository.findByCourseOfferings_OfferingId(offeringId);
+    }
+
 }

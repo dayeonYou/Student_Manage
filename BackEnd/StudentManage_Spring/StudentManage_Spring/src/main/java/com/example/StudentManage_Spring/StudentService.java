@@ -10,5 +10,6 @@ public interface StudentService {
     void deleteStudent(int id);
     void saveStudent(Student student);
     Student updateStudentField(int id, String fieldName, String newValue);
+    List<Student> getStudentsByCourseOffering(Long offeringId);
 
 }

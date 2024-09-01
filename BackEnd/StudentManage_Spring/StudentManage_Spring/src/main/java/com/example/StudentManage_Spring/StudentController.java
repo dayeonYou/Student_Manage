@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/students")
@@ -47,5 +48,14 @@ public class StudentController {
         return new ResponseEntity<>(studentService.updateStudentField(id, field, value), HttpStatus.OK);
     }
 
+
+    // 특정 강의를 수강하는 학생 목록 조회
+    @GetMapping("/course/{courseId}")
+    public List<StudentDTO> getStudentsByCourseOffering(@PathVariable Long courseId) {
+        return studentService.getStudentsByCourseOffering(courseId)
+                .stream()
+                .map(StudentDTO::new)
+                .collect(Collectors.toList());
+    }
 
 }

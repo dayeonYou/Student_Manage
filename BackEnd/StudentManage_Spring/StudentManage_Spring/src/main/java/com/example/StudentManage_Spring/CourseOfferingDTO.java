@@ -15,4 +15,5 @@ public class CourseOfferingDTO {
     private SubjectDTO subject; // SubjectDTO를 사용하여 필드 제한
 
     // Constructor, Getters, and Setters
+
 }

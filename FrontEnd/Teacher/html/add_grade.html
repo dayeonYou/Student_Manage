@@ -23,27 +23,21 @@
         </div>
         <div class="main-container">
             <div class="form-container">
-                <h2>성적 등록</h2>
+                <h2>이번 학기 성적 등록</h2>
                 <form id="gradeForm">
                     <div class="form-group">
                         <label for="semester">학기 :</label>
-                        <select id="semester" name="semester" required>
-                            <option value="">학기 선택</option>
-                            <option value="Spring">봄 학기</option>
-                            <option value="Summer">여름 학기</option>
-                            <option value="Fall">가을 학기</option>
-                            <option value="Winter">겨울 학기</option>
-                        </select>
+                        <input type="text" id="semester" name="semester" readonly>
                     </div>
                     <div class="form-group">
                         <label for="year">년도 :</label>
-                        <input type="number" id="year" name="year" min="2010" max="2025" required>
+                        <input type="text" id="year" name="year" readonly>
                     </div>
                     <div class="form-group">
                         <label for="course">강의 :</label>
                         <select id="course" name="course" required>
                             <option value="">강의 선택</option>
-                            <!-- 서버에서 가져온 강의 목록이 여기 표시 -->
+                            <!-- 서버에서 가져온 강의 목록이 여기에 표시 -->
                         </select>
                     </div>
                     <div id="studentsTable">

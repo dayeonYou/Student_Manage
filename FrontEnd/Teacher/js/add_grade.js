@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.navigation button').forEach(button => {
         button.addEventListener('click', () => {
@@ -36,40 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('오류:', error));
     });
-});
 
-document.getElementById('semester').addEventListener('change', fetchCourses);
-document.getElementById('year').addEventListener('change', fetchCourses);
+    // Set year and semester automatically
+    setYearAndSemester();
 
-function fetchCourses() {
-    const semester = document.getElementById('semester').value;
-    const year = document.getElementById('year').value;
+    // Fetch courses and populate them based on current year and semester
+    fetchCourses();
 
-    if (semester && year) {
-        fetch(`/api/courses?semester=${semester}&year=${year}`)
-            .then(response => response.json())
-            .then(data => {
-                const courseSelect = document.getElementById('course');
-                courseSelect.innerHTML = '<option value="">강의 선택</option>';
+    // Handle course selection and fetch students
+    document.getElementById('course').addEventListener('change', function() {
+        const courseId = this.value;
 
-                data.forEach(course => {
-                    const option = document.createElement('option');
-                    option.value = course.course_id;
-                    option.textContent = course.course_name;
-                    courseSelect.appendChild(option);
-                });
-            })
-            .catch(error => {
-                console.error('강의 목록을 불러오는 중 오류 발생:', error);
-            });
-    }
-}
-
-document.getElementById('course').addEventListener('change', function() {
-    const courseId = this.value;
-
-    if (courseId) {
-        fetch(`/api/students?course_id=${courseId}`)
+        if (courseId) {
+            fetch(`http://localhost:8080/students/course/${courseId}`)
             .then(response => response.json())
             .then(data => {
                 const studentsTable = document.getElementById('studentsTable');
@@ -85,9 +63,9 @@ document.getElementById('course').addEventListener('change', function() {
                         <tbody>
                             ${data.map(student => `
                                 <tr>
-                                    <td>${student.student_id}</td>
+                                    <td>${student.studentId}</td> <!-- 수정된 부분 -->
                                     <td>${student.name}</td>
-                                    <td><input type="number" name="score_${student.student_id}" step="0.01" min="0" max="100" required></td>
+                                    <td><input type="number" name="score_${student.studentId}" step="0.01" min="0" max="100" required></td> <!-- 수정된 부분 -->
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -97,42 +75,88 @@ document.getElementById('course').addEventListener('change', function() {
             .catch(error => {
                 console.error('학생 목록을 불러오는 중 오류 발생:', error);
             });
-    }
-});
-
-document.getElementById('gradeForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(this);
-    const scores = {};
-
-    for (let [key, value] of formData.entries()) {
-        if (key.startsWith('score_')) {
-            const studentId = key.split('_')[1];
-            scores[studentId] = value;
         }
+    });
+
+    document.getElementById('gradeForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const scores = {};
+
+        for (let [key, value] of formData.entries()) {
+            if (key.startsWith('score_')) {
+                const studentId = key.split('_')[1];
+                scores[studentId] = value;
+            }
+        }
+
+        const requestData = {
+            semester: formData.get('semester'),
+            year: formData.get('year'),
+            course_id: formData.get('course'),
+            scores: scores
+        };
+
+        fetch('/api/grades', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('성적이 성공적으로 등록되었습니다!');
+            })
+            .catch(error => {
+                console.error('성적 등록 중 오류 발생:', error);
+                alert('성적 등록 중 오류가 발생했습니다.');
+            });
+    });
+});
+
+function setYearAndSemester() {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+
+    let semester = '';
+    if (currentMonth >= 1 && currentMonth <= 2) {
+        semester = 'Winter';
+    } else if (currentMonth >= 3 && currentMonth <= 6) {
+        semester = 'Spring';
+    } else if (currentMonth >= 7 && currentMonth <= 8) {
+        semester = 'Summer';
+    } else {
+        semester = 'Fall';
     }
 
-    const requestData = {
-        semester: formData.get('semester'),
-        year: formData.get('year'),
-        course_id: formData.get('course'),
-        scores: scores
-    };
+    document.getElementById('year').value = currentYear;
+    document.getElementById('semester').value = semester;
+}
 
-    fetch('/api/grades', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-    })
+function fetchCourses() {
+    const semester = document.getElementById('semester').value;
+    const year = document.getElementById('year').value;
+    const teacherId = sessionStorage.getItem('teacherId');
+
+    if (semester && year && teacherId) {
+        fetch(`http://localhost:8080/teachers/${teacherId}/course-offerings?year=${year}&semester=${semester}`)
         .then(response => response.json())
-        .then(data => {
-            alert('성적이 성공적으로 등록되었습니다!');
-        })
-        .catch(error => {
-            console.error('성적 등록 중 오류 발생:', error);
-            alert('성적 등록 중 오류가 발생했습니다.');
-        });
-});
+            .then(data => {
+                const courseSelect = document.getElementById('course');
+                courseSelect.innerHTML = '<option value="">강의 선택</option>';
+
+                data.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.offeringId;
+                    option.textContent = `과목ID: ${course.subject.subjectId} / ${course.subject.subjectName} / 요일: ${course.dayOfWeek} / 시작 시간: ${course.startClassTime}`;
+                    courseSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('강의 목록을 불러오는 중 오류 발생:', error);
+            });
+    }
+}
