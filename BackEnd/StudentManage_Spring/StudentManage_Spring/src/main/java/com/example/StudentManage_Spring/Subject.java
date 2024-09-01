@@ -1,13 +1,16 @@
 package com.example.StudentManage_Spring;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.math.BigDecimal;
-@Setter
+
+import java.util.List;
+
 @Getter
+@Setter
 @Entity
-@Table(name = "Subject")
+@Table(name = "subject")
 public class Subject {
 
     @Id
@@ -24,4 +27,7 @@ public class Subject {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "subject")
+    @JsonIgnore
+    private List<CourseOffering> courseOfferings;
 }

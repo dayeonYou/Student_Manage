@@ -1,4 +1,3 @@
-// CourseController.java
 package com.example.StudentManage_Spring;
 
 import org.springframework.beans.factory.annotation.Autowired;

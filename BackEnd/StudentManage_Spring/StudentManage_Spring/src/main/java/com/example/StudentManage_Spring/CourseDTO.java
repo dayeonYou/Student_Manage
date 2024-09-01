@@ -1,4 +1,3 @@
-// CourseDTO.java
 package com.example.StudentManage_Spring;
 
 import lombok.Getter;

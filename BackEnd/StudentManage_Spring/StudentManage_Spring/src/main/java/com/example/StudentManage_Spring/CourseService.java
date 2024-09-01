@@ -1,4 +1,3 @@
-// CourseService.java
 package com.example.StudentManage_Spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +10,20 @@ import java.util.stream.Collectors;
 public class CourseService {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseOfferingRepository courseOfferingRepository; // 수정된 이름
 
     @Autowired
     private SubjectRepository subjectRepository;
 
     public List<CourseDTO> getCoursesByYearAndSemester(Integer year, String semester) {
-        List<Course> courses = courseRepository.findByYearAndSemester(year, semester);
+        List<CourseOffering> courseOfferings = courseOfferingRepository.findByYearAndSemester(year, semester);
 
-        return courses.stream().map(course -> {
-            Subject subject = subjectRepository.findById(course.getSubjectId()).orElse(null);
+        return courseOfferings.stream().map(courseOffering -> {
+            Subject subject = courseOffering.getSubject();
             String subjectName = (subject != null) ? subject.getSubjectName() : "N/A";
             String teacherName = (subject != null && subject.getTeacher() != null) ? subject.getTeacher().getName() : "N/A";
 
-            return new CourseDTO(subjectName, course.getSubjectId(), teacherName, course.getDayOfWeek(), course.getStartClassTime());
+            return new CourseDTO(subjectName, subject.getSubjectId(), teacherName, courseOffering.getDayOfWeek(), courseOffering.getStartClassTime());
         }).collect(Collectors.toList());
     }
 }

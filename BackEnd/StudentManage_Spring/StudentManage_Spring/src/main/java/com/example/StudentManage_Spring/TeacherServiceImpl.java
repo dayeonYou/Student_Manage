@@ -10,6 +10,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+    @Autowired
+    private CourseOfferingRepository courseOfferingRepository;
+
 
     @Override
     public Teacher addTeacher(Teacher teacher) {
@@ -47,5 +50,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void saveTeacher(Teacher teacher) {
         teacherRepository.save(teacher);
+    }
+
+
+    @Override
+    public List<CourseOffering> getCourseOfferingsByTeacherAndYearAndSemester(int teacherId, int year, String semester) {
+        return courseOfferingRepository.findCourseOfferingsByTeacherAndYearAndSemester(teacherId, year, semester);
     }
 }

@@ -9,4 +9,6 @@ public interface TeacherService {
     List<Teacher> getAllTeachers();
     void deleteTeacher(int id);
     void saveTeacher(Teacher teacher);
+    List<CourseOffering> getCourseOfferingsByTeacherAndYearAndSemester(int teacherId, int year, String semester);
+
 }

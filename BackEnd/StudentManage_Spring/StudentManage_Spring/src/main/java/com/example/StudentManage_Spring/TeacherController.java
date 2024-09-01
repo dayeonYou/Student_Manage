@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/teachers")
@@ -37,5 +38,17 @@ public class TeacherController {
     public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
         teacherService.deleteTeacher(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}/course-offerings")
+    public ResponseEntity<List<CourseOfferingDTO>> getCourseOfferings(
+            @PathVariable int id,
+            @RequestParam int year,
+            @RequestParam String semester) {
+        List<CourseOffering> courseOfferings = teacherService.getCourseOfferingsByTeacherAndYearAndSemester(id, year, semester);
+        List<CourseOfferingDTO> dtos = courseOfferings.stream()
+                .map(CourseOfferingMapper::toDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 }

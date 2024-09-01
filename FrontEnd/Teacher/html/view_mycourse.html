@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 목록</title>
+    <link rel="stylesheet" href="../../css/styles2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="login-info">
+                <h2>로그인 정보</h2>
+                <p id="username">사용자 이름</p>
+                <p id="role">교수</p>
+            </div>
+            <nav class="navigation">
+                <button data-url="view_mycourse.html">강의 목록 확인</button>
+                <button data-url="add_grade.html">성적 등록</button>
+                <button data-url="change_pw.html">비밀번호 변경</button>
+            </nav>
+            <button class="logout-button">Logout</button>
+        </div>
+        <div class="main-container">
+
+        <h1>강의 목록 확인하기</h1>
+        <form id="courseOfferingForm">
+            <div class="form-group">
+                <label for="year">년도</label>
+                <select id="year" name="year">
+                    <option value="">년도 선택</option>
+                    <!-- JavaScript로 동적으로 추가 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="semester">학기</label>
+                <select id="semester" name="semester">
+                    <option value="">학기 선택</option>
+                    <option value="Spring">봄학기</option>
+                    <option value="Summer">여름학기</option>
+                    <option value="Fall">가을학기</option>
+                    <option value="Winter">겨울학기</option>
+                </select>
+            </div>
+            <button type="submit">강의 목록 가져오기</button>
+        </form>
+
+        <h2>강의 목록</h2>
+        <table id="courseOfferingsTable">
+            <thead>
+                <tr>
+                    <th>강의 번호</th>
+                    <th>과목 번호</th>
+                    <th>과목 이름</th> 
+                    <th>년도</th>
+                    <th>학기</th>
+                    <th>요일</th>
+                    <th>시작 시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 데이터 삽입 -->
+            </tbody>
+        </table>
+    </div>
+    <script src="../js/view_mycourse.js"></script>
+</body>
+</html>
