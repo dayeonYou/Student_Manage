@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 변경</title>
+    <link rel="stylesheet" href="../../css/styles2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="login-info">
+                <h2>로그인 정보</h2>
+                <p id="username">사용자 이름</p>
+                <p id="role">교수</p>
+            </div>
+            <nav class="navigation">
+                <button data-url="add_grade.html">성적 등록</button>
+                <button data-url="change_pw.html">비밀번호 변경</button>
+            </nav>
+            <button class="logout-button">Logout</button>
+        </div>
+        <div class="main-container">
+            <h1>비밀번호 변경</h1>
+            <div class="form-group">
+                <label for="currentPassword">현재 비밀번호</label>
+                <input type="password" id="currentPassword" placeholder="Enter your current password">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">새 비밀번호</label>
+                <input type="password" id="newPassword" placeholder="Enter your new password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">새 비밀번호 확인</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your new password">
+            </div>
+            <div class="form-group">
+                <button onclick="changePassword()">변경하기</button>
+            </div>
+            <div class="message" id="message"></div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/change_pw.js"></script>
+
+</body>
+</html>

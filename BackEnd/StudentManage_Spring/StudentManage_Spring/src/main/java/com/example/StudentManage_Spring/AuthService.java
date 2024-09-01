@@ -49,4 +49,15 @@ public class AuthService {
         return false;
     }
 
+    public boolean changePasswordT(int teacherId, String currentPassword, String newPassword) {
+        Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
+        if (teacher != null && passwordEncoder.matches(currentPassword, teacher.getPassword())) {
+            String encodedNewPassword = passwordEncoder.encode(newPassword);
+            teacher.setPassword(encodedNewPassword);
+            teacherRepository.save(teacher);
+            return true;
+        }
+        return false;
+    }
+
 }

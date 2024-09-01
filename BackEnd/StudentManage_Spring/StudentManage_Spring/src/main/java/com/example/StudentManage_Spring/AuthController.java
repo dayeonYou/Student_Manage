@@ -116,4 +116,19 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/changePasswordT")
+    public ResponseEntity<Map<String, Object>> changePasswordT(
+            @RequestParam int teacherId,
+            @RequestParam String currentPassword,
+            @RequestParam String newPassword) {
+
+        boolean isPasswordChanged = authService.changePasswordT(teacherId, currentPassword, newPassword);
+
+        if (isPasswordChanged) {
+            return ResponseEntity.ok(Collections.singletonMap("message", "Password changed successfully"));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "Invalid current password"));
+        }
+    }
+
 }
