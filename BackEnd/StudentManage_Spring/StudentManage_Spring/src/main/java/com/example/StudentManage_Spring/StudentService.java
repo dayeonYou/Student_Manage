@@ -1,5 +1,7 @@
 package com.example.StudentManage_Spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 public interface StudentService {
@@ -12,4 +14,5 @@ public interface StudentService {
     Student updateStudentField(int id, String fieldName, String newValue);
     List<Student> getStudentsByCourseOffering(Long offeringId);
 
+    Student findStudentById(int id);
 }

@@ -77,5 +77,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getStudentsByCourseOffering(Long offeringId) {
         return studentRepository.findByCourseOfferings_OfferingId(offeringId);
     }
+    public Student findStudentById(int id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+    }
 
 }

@@ -10,3 +10,4 @@ public interface GradeService {
     List<Grade> getGradesByStudent(int studentId);
     List<Grade> getGradesByStudentSemesterYear(int studentId, String semester, int year);
 }
+
